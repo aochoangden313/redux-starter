@@ -5,7 +5,7 @@ export interface CounterState {
 }
 
 const initialState = {
-  value: 0,
+  value: 10,
   name: "QuanLV",
   email: "quanlv.mcc@gmail.com",
   address: {
