@@ -2,12 +2,17 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useAppSelector } from '../redux/hook';
 
 function Header() {
+
+   const users = useAppSelector((state) => state.user.listUsers);
+
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">QuanLV Navbar</Navbar.Brand>
+        <Navbar.Brand href="#home">QuanLV Navbar {users.length}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
