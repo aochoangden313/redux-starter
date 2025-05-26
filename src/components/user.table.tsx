@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { fetchListUsers } from '../redux/user/user.slide';
 import { useAppDispatch, useAppSelector } from '../redux/hook';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 function UsersTable() {
 
@@ -13,6 +13,7 @@ function UsersTable() {
 
   useEffect(() => {
     dispatch(fetchListUsers())
+    toast('🦄 Wow so easy!');
   }, []);
 
   return (
