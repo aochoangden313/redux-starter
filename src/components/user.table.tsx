@@ -77,18 +77,13 @@ function UsersTable() {
       <UpdateUserForm
         showUpdateUser={showUpdateUser}
         handleCloseUpdateUser={handleCloseUpdateUser}
-        handleClose={handleCloseUpdateUser}
-        handleUpdateUser={(user: any) => {
-          setSelectedUser(user);
-          setShowUpdateUser(true);
-        }}
         selectedUser={selectedUser}
       />
 
       <DeleteUserForm
-        show={showDeleteUser}
-        handleClose={handleCloseDeleteUser}
-        user={selectedDeleteUser}
+        showDeleteUser={showDeleteUser}
+        handleCloseDeleteUser={handleCloseDeleteUser}
+        selectedDeleteUser={selectedDeleteUser}
       />
     </>
 
