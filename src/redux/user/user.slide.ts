@@ -8,17 +8,46 @@ interface IUser {
 
 
 const initialState: {
-  listUsers: IUser[]
+  listUsers: IUser[],
+  isCreatedSuccess: boolean,
 } = {
-  listUsers: []
+  listUsers: [],
+  isCreatedSuccess: false,
+}
+
+
+interface IUserPayload {
+  name: string;
+  email: string;
 }
 
 // First, create the thunk
 export const fetchListUsers = createAsyncThunk(
   'users/fetchByIdStatus',
-  async (userId, thunkAPI) => {
+  async () => {
     const res = await fetch("http://localhost:8000/users");
     const data = await res.json();
+    return data;
+  },
+)
+
+export const createNewUser = createAsyncThunk(
+  'users/createNewUser',
+  async (payload: IUserPayload, thunkAPI) => {
+
+    const res = await fetch("http://localhost:8000/users", {
+      method: 'POST',
+      body: JSON.stringify({
+        ...payload,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    if (data && data.id) {
+      thunkAPI.dispatch(fetchListUsers());
+    }
     return data;
   },
 )
@@ -27,8 +56,9 @@ export const userSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-
-
+    resetCreateUser(state) {
+      state.isCreatedSuccess = false;
+    }
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -36,12 +66,17 @@ export const userSlice = createSlice({
       // Add user to the state array
       // state.entities.push(action.payload)
       state.listUsers = action.payload;
-      console.log("fetchListUsers", action);
-    })
+
+    }),
+      builder.addCase(createNewUser.fulfilled, (state, action) => {
+        // Add user to the state array
+        // state.entities.push(action.payload)
+        state.isCreatedSuccess = true;
+      })
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { } = userSlice.actions
+export const { resetCreateUser} = userSlice.actions
 
 export default userSlice.reducer

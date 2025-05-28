@@ -1,12 +1,27 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import UsersTable from './user.table';
-import { Container } from 'react-bootstrap';
+import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
+import { useState } from 'react';
+import CreateUserForm from './users/create.user.form';
 
 function TabContent() {
+
+    const [isOpenCreateForm, setIsOpenCreateForm] = useState(false);
+
+  const handleClose = () => setIsOpenCreateForm(false);
+  const handleShow = () => setIsOpenCreateForm(true);
+
   return (
     <>
-      <Container>
+      <Container style={{ paddingTop: '20px' }}>
+        <Row>
+          <Col>Table Users</Col>
+          <Col className="d-flex justify-content-end">
+          <Button onClick={handleShow} variant="primary">
+            Create User
+            </Button></Col>
+        </Row>
 
         <Tabs
           defaultActiveKey="user"
@@ -21,6 +36,8 @@ function TabContent() {
           </Tab>
         </Tabs>
       </Container>
+
+      <CreateUserForm show={isOpenCreateForm} setIsOpenCreateForm={setIsOpenCreateForm} />
     </>
 
   );
