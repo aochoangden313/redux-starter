@@ -10,13 +10,16 @@ interface IUser {
 const initialState: {
   listUsers: IUser[],
   isCreatedSuccess: boolean,
+  isUpdatedSuccess: boolean,
 } = {
   listUsers: [],
   isCreatedSuccess: false,
+  isUpdatedSuccess: false,
 }
 
 
 interface IUserPayload {
+  id?: number;
   name: string;
   email: string;
 }
@@ -52,12 +55,38 @@ export const createNewUser = createAsyncThunk(
   },
 )
 
+export const updateUser = createAsyncThunk(
+  'users/updateUser', 
+  async (payload: IUserPayload, thunkAPI) => {
+
+    console.log('payload update >>> ', payload);
+
+    const res = await fetch(`http://localhost:8000/users/${payload.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        ...payload,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    if (data && data.id) {
+      thunkAPI.dispatch(fetchListUsers());
+    }
+    return data;
+  },
+)
+
 export const userSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
     resetCreateUser(state) {
       state.isCreatedSuccess = false;
+    },
+    resetUpdateUser(state) {
+      state.isUpdatedSuccess = false;
     }
   },
   extraReducers: (builder) => {
@@ -72,11 +101,14 @@ export const userSlice = createSlice({
         // Add user to the state array
         // state.entities.push(action.payload)
         state.isCreatedSuccess = true;
+      }),
+      builder.addCase(updateUser.fulfilled, (state, action) => {
+        state.isUpdatedSuccess = true;
       })
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { resetCreateUser} = userSlice.actions
+export const { resetCreateUser, resetUpdateUser } = userSlice.actions
 
 export default userSlice.reducer

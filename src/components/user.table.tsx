@@ -29,7 +29,7 @@ function UsersTable() {
   }
 
 
-    const handleCloseDeleteUser = () => {
+  const handleCloseDeleteUser = () => {
     setShowDeleteUser(false);
     setSelectedDeleteUser(null);
   }
@@ -75,7 +75,8 @@ function UsersTable() {
       </Table>
 
       <UpdateUserForm
-        show={showUpdateUser}
+        showUpdateUser={showUpdateUser}
+        handleCloseUpdateUser={handleCloseUpdateUser}
         handleClose={handleCloseUpdateUser}
         handleUpdateUser={(user: any) => {
           setSelectedUser(user);

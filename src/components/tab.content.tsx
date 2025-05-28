@@ -7,7 +7,7 @@ import CreateUserForm from './users/create.user.form';
 
 function TabContent() {
 
-    const [isOpenCreateForm, setIsOpenCreateForm] = useState(false);
+  const [isOpenCreateForm, setIsOpenCreateForm] = useState(false);
 
   const handleClose = () => setIsOpenCreateForm(false);
   const handleShow = () => setIsOpenCreateForm(true);
@@ -18,8 +18,8 @@ function TabContent() {
         <Row>
           <Col>Table Users</Col>
           <Col className="d-flex justify-content-end">
-          <Button onClick={handleShow} variant="primary">
-            Create User
+            <Button onClick={handleShow} variant="primary">
+              Create User
             </Button></Col>
         </Row>
 
