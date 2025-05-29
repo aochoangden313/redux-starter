@@ -11,18 +11,11 @@ function TabContent() {
   const [isOpenCreateForm, setIsOpenCreateForm] = useState(false);
 
   const handleClose = () => setIsOpenCreateForm(false);
-  const handleShow = () => setIsOpenCreateForm(true);
+
 
   return (
     <>
       <Container style={{ paddingTop: '20px' }}>
-        <Row>
-          <Col>Table Users</Col>
-          <Col className="d-flex justify-content-end">
-            <Button onClick={handleShow} variant="primary">
-              Create User
-            </Button></Col>
-        </Row>
 
         <Tabs
           defaultActiveKey="user"
