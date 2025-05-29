@@ -4,6 +4,7 @@ import UsersTable from './user.table';
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
 import { useState } from 'react';
 import CreateUserForm from './users/create.user.form';
+import BlogsTable from './blog.table';
 
 function TabContent() {
 
@@ -32,7 +33,7 @@ function TabContent() {
             <UsersTable />
           </Tab>
           <Tab eventKey="blog" title="Blog">
-            Tab content for Profile 2
+            <BlogsTable />
           </Tab>
         </Tabs>
       </Container>
