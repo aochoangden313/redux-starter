@@ -28,8 +28,8 @@ function Header() {
           <Form.Check // prettier-ignore
             type="switch"
             id="custom-switch"
-            value={mode}
-            onChange={(e) => dispatch(changeMode(e.target.value === 'light' ? 'dark' : 'light'))}
+            defaultChecked={mode === 'light' ? false : true}
+            onChange={(e) => dispatch(changeMode(e.target.checked === true ? 'dark' : 'light'))}
             label={mode === 'light' ?
               <Navbar.Text>Light Mode</Navbar.Text>
               : <Navbar.Text>Dark Mode</Navbar.Text>
